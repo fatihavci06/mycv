@@ -14,5 +14,17 @@ return [
     */
 
     'test' => 'test',
+    'index'=>'Anasayfa',
+    'personal_information'=>'Personel Bilgileri',
+    'birthday'=>'Doğum Günü',
+    'website'=>'Web Site',
+    'phone'=>'Telefon',
+    'mail'=>'E-posta',
+    'location'=>'Lokasyon',
+    'downloadcv'=>'CV indir',
+    'languages'=>'YABANCI DİLLER',
+    'interests'=>'HOBİLER',
+    'education'=>'Eğitimler',
+    'experience'=>'Deneyimler',
 
 ];

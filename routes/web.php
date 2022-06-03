@@ -14,18 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),//tarayıcı dili prefix olarak ayarlandı
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect' ]// eğer prefix boşsa vs middleware ile gerekli yönlendirmeler otomatik olarak yapılır
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect','frontmid' ]// eğer prefix boşsa vs middleware ile gerekli yönlendirmeler otomatik olarak yapılır
 ], function() {
    
    
 
-   Route::get(LaravelLocalization::transRoute('routes.index'), 'front\IndexController@index')->name('front.index'); //örneğin url/tr/hakkimizda //aboutun 4.maddede tr/routes.php de karşılığı
+  // Route::get(LaravelLocalization::transRoute('routes.index'), 'front\IndexController@index') //örneğin url/tr/hakkimizda //aboutun 4.maddede tr/routes.php de karşılığı
    Route::get(LaravelLocalization::transRoute('routes.resume'), 'front\IndexController@resume')->name('front.resume');
    Route::get(LaravelLocalization::transRoute('routes.portfolio'), 'front\IndexController@portfolio')->name('front.portfolio'); 
    Route::get(LaravelLocalization::transRoute('routes.blog'), 'front\IndexController@blog')->name('front.blog'); 
    Route::get(LaravelLocalization::transRoute('routes.contact'), 'front\IndexController@contact')->name('front.contact');
-   Route::get('/','front\IndexController@index'); 
+   Route::get('/','front\IndexController@index')->name('front.index'); 
+   Route::get('/download_cv','front\IndexController@download_cv')->name('front.download_cv'); 
 });
+
 //Route::get('/','front\IndexController@index')->name('front.index');  
 /*Route::get('/resume','front\IndexController@resume')->name('front.resume');
 Route::get('/portfolio','front\IndexController@portfolio')->name('front.portfolio');  
@@ -51,5 +53,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/deneyim-sil/{id}','back\IndexController@deneyimsil')->name('back.deneyim.sil');
     Route::get('/deneyim-duzenle/{id}','back\IndexController@deneyimduzenle')->name('back.deneyim.duzenle');
     Route::post('/deneyim-update/{id}','back\IndexController@deneyimupdate')->name('back.deneyimupdate');
+    Route::get('/anasayfa-icerik','back\IndexController@anasayfaicerik')->name('back.anasayfaicerik.list');
+    Route::get('/anasayfa-icerik-sil/{id}','back\IndexController@anasayfaiceriksil')->name('back.anasayfaicerik.sil');
+    Route::get('/anasayfa-icerik-duzenle/{id}','back\IndexController@anasayfaicerikduzenle')->name('back.anasayfaicerik.duzenle');
+    Route::post('/anasayfa-icerik-update/{id}','back\IndexController@anasayfaicerikupdate')->name('back.anasayfaicerik.update');
     
 });

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\egitim;
 use App\Models\experience;
+use App\Models\personal;
+use App;
+ use Illuminate\Support\Facades\Storage;
 class IndexController extends Controller
 {
     /**
@@ -15,10 +18,51 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $egitim=egitim::where('status',1)->orderBy('order', 'asc')->get();
-        $deneyim=experience::where('status',1)->orderBy('order', 'asc')->get();
-        return view('front.index',['egitim'=>$egitim,'deneyim'=>$deneyim]);
+        $dil=App::getlocale();
+        if($dil=='tr'){
+            $dil=1;
+        }
+        else if($dil=='en'){
+            $dil=2;
+        }
+        
+        $egitim=egitim::where('status',1)->where('language_id',$dil)->orderBy('order', 'asc')->get();
+        $personal=personal::where('language_id',$dil)->first();
+        
+        $deneyim=experience::where('status',1)->where('language_id',$dil)->orderBy('order', 'asc')->get();
+        return view('front.index',['egitim'=>$egitim,'deneyim'=>$deneyim,'personal'=>$personal]);
     }
+
+    public static function personal_info(){
+        $dil=App::getlocale();
+        if($dil=='tr'){
+            $dil=1;
+        }
+        else if($dil=='en'){
+            $dil=2;
+        }
+        $personal=personal::where('language_id',$dil)->first();
+
+        return $personal;
+    }
+    public function download_cv(){
+        $dil=App::getlocale();
+        if($dil=='tr'){
+            $dil=1;
+        }
+        else if($dil=='en'){
+            $dil=2;
+        }
+        $personal=personal::select('cv')->where('language_id',$dil)->first();
+        if($personal->cv==''){
+            return redirect()->back()->with(['status'=>'cv bulunamadı']);
+        }
+        return Storage::download($personal->cv);
+    }
+
+
+
+
      public function resume()
     {
         return view('front.resume');

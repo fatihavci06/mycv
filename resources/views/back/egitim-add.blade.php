@@ -42,6 +42,16 @@
                                 <textarea name="description" id="description" value="{{old('description')}}" class="form-control"></textarea>
                               </div>
                               <div class="form-group col-lg-6">
+                                <label  for="status">Dil</label>
+                                
+                                  <select id="language_id" name="language_id" class="form-control">
+                                    <option  value="" selected>Seçiniz...</option>
+                                    <option value="1" @if(old('status')==1) selected @endif>Türkçe</option>
+                                    <option value="2" @if(old('status')==2) selected @endif>English</option>
+                                  </select>
+
+                              </div>
+                              <div class="form-group col-lg-6">
                                 <label  for="status">Durum</label>
                                 
                                   <select id="status" name="status" class="form-control">

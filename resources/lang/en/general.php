@@ -14,5 +14,17 @@ return [
     */
 
     'test' => 'Testen',
+    'index'=>'Dashboard',
+    'personal_information'=>'Personal Information',
+    'birthday'=>'Birthday',
+    'website'=>'Web Site',
+    'phone'=>'Telefon',
+    'mail'=>'E-posta',
+    'location'=>'Location',
+    'downloadcv'=>'Download CV',
+    'languages'=>'LANGUAGES',
+    'interests'=>'INTERESTS',
+    'education'=>'EDUCATION',
+    'experience'=>'EXPERIENCE',
 
 ];

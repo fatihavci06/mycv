@@ -42,6 +42,7 @@
                                 <label for="description">Açıklama</label>
                                 <textarea name="description" id="description"class="form-control">{{$data->description}}</textarea>
                               </div>
+                              
                               <div class="form-group col-lg-6">
                                 <label  for="status">Durum</label>
                                 
@@ -49,6 +50,16 @@
                                     <option  value="" selected>Seçiniz...</option>
                                     <option value="1" @if($data->status==1) selected @endif>Aktif</option>
                                     <option value="0" @if($data->status==0) selected @endif>Pasif</option>
+                                  </select>
+
+                              </div>
+                              <div class="form-group col-lg-6">
+                                <label  for="status">Dil</label>
+                                
+                                  <select id="language_id" name="language_id" class="form-control">
+                                    <option  value="" selected>Seçiniz...</option>
+                                    <option value="1" @if($data->language_id==1) selected @endif>Türkçe</option>
+                                    <option value="2" @if($data->language_id==2) selected @endif>English</option>
                                   </select>
 
                               </div>
@@ -88,7 +99,8 @@
         var university_branch=$("input[name=university_branch]").val();
         var order=$("input[name=order]").val();
         var description=$("#description").val();
-
+        var language_id=$("#language_id").val();
+       
         var status=$("#status").val();
         
         
@@ -99,7 +111,7 @@
           
             url:url,
 
-           data:{education_date:education_date,university_name:university_name,university_branch:university_branch,description:description,status:status,order:order},
+           data:{education_date:education_date,university_name:university_name,university_branch:university_branch,description:description,status:status,order:order,language_id:language_id},
 
            success:function(data){
 

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\egitim;
+use App\Models\personal;
 use App\Models\experience;
-
+use Illuminate\Support\Facades\Storage;
 class IndexController extends Controller
 {
     /**
@@ -47,6 +48,72 @@ class IndexController extends Controller
         $data->save();
         return response()->json(['success'=>'degisti','status'=>$data->status]);
     }
+    public function anasayfaicerik(){
+        $data=personal::with('language_name')->get();
+       // return $data;
+        return view('back.anasayfaicerik',['data'=>$data]);
+    }
+    public function anasayfaiceriksil($id){
+        
+        $data=personal::find($id);
+        $data->delete();
+        return redirect()->back();
+
+    }
+    public function anasayfaicerikduzenle($id){
+        $data=personal::find($id);
+        return view('back.anasayfaicerik-edit',['data'=>$data]);
+    }
+    public function anasayfaicerikupdate(Request $request,$id)
+    {
+
+        $request->validate([
+            'main_title'=>'required',
+            'about_text'=>'required',
+            'btn_contact_text'=>'required',
+            'full_name'=>'required',
+            'small_title_left'=>'required',
+            'small_title_right'=>'required',
+            'task_name'=>'required',
+            'birthday'=>'required',
+            'website'=>'required',
+            'phone'=>'required',
+            'image' => 'mimes:jpeg,jpg,png,gif|max:10000',
+            'cv' => 'mimes:pdf|max:10000',
+            'mail'=>'required|email',
+            'address'=>'required',
+             'languages'=>'required',
+            'interests'=>'required',
+           ]);
+
+           $data=personal::find($id);
+           $data->main_title=$request->main_title;
+           $data->about_text=$request->about_text;
+           $data->btn_contact_text=$request->btn_contact_text;
+           $data->full_name=$request->full_name;
+           $data->small_title_right=$request->small_title_right;
+           $data->small_title_left=$request->small_title_left;
+           $data->task_name=$request->task_name;
+           $data->birthday=$request->birthday;
+           $data->website=$request->website;
+           $data->phone=$request->phone;
+           $data->mail=$request->mail;
+           $data->address=$request->address;
+           $data->languages=$request->languages;
+           $data->interests=$request->interests;
+           if(!empty($request->file('image'))){
+            Storage::delete($data->image);
+            $data->image=Storage::putFile('images', $request->file('image'));  //storage burda
+            
+            }
+            if(!empty($request->file('cv'))){
+                Storage::delete($data->cv);
+                $data->cv=Storage::putFile('cv', $request->file('cv'));  //storage burda
+                
+            }
+            $data->save();
+            return redirect()->back()->with('status','düzenlendi');
+    }
     public function egitimekle()
     {
         return view('back.egitim-add');
@@ -64,6 +131,7 @@ class IndexController extends Controller
             'university_branch'=>'required',
             'status'=>'required',
             'order'=>'required',
+            'language_id'=>'required',
            ]);
         $data=  egitim::find($id);
         $data->education_date=$request->education_date;
@@ -71,6 +139,7 @@ class IndexController extends Controller
         $data->education_date=$request->education_date;
         $data->university_branch=$request->university_branch;
         $data->order=$request->order;
+        $data->language_id=$request->language_id;
         $data->description=$request->description;
         $data->status=$request->status;
         $saved=$data->save();
@@ -98,12 +167,14 @@ class IndexController extends Controller
             'university_branch'=>'required',
             'status'=>'required',
             'order'=>'required',
+            'language_id'=>'required',
            ]);
         $data=new egitim;
         $data->education_date=$request->education_date;
         $data->university_name=$request->university_name;
         $data->university_branch=$request->university_branch;
         $data->order=$request->order;
+        $data->language_id=$request->language_id;
         $data->description=$request->description;
         $data->status=$request->status;
         $saved=$data->save();
@@ -144,6 +215,7 @@ class IndexController extends Controller
             'status'=>'required',
             'active'=>'required',
             'order'=>'required',
+            'language_id'=>'required',
            ]);
         $data=new experience;
         $data->task_name=$request->task_name;
@@ -152,6 +224,7 @@ class IndexController extends Controller
         $data->description=$request->description;
         $data->status=$request->status;
         $data->order=$request->order;
+        $data->language_id=$request->language_id;
         $data->active=$request->active;
         $save=$data->save();
         if(!$save){
@@ -193,6 +266,7 @@ class IndexController extends Controller
             'status'=>'required',
             'active'=>'required',
             'order'=>'required',
+            'language_id'=>'required',
            ]);
         $data=experience::find($id);
         $data->task_name=$request->task_name;
@@ -200,6 +274,7 @@ class IndexController extends Controller
         $data->date=$request->date;
         $data->description=$request->description;
         $data->order=$request->order;
+        $data->language_id=$request->language_id;
         $data->status=$request->status;
         $data->active=$request->active;
         $save=$data->save();
