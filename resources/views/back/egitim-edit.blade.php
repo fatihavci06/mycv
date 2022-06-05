@@ -1,7 +1,8 @@
 
 
 @extends('layouts.back.master')
-@section('title','Eğitim Düzenle')
+@section('title','
+ Düzenle')
 @section('content')
 
 

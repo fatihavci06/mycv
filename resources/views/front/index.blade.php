@@ -43,35 +43,7 @@
                 </div>
             </section>
             
-            <section class="testimonial-section">
-                <div id="testimonialCarousel" class="testimonial-carousel carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <p class="testimonial-content">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed tortor.</p>
-                            <img src="{{asset('front/')}}/assets/images/Profile.png" alt="profile" class="testimonial-img">
-                            <p class="testimonial-name">Nout Golstein</p>
-                        </div>
-                        <div class="carousel-item">
-                            <p class="testimonial-content">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed tortor.</p>
-                            <img src="{{asset('front/')}}/assets/images/Profile.png" alt="profile" class="testimonial-img">
-                            <p class="testimonial-name">Nout Golstein</p>
-                        </div>
-                        <div class="carousel-item">
-                            <p class="testimonial-content">Mauris magna sapien, pharetra consectetur fringilla vitae,
-                                interdum sed tortor.</p>
-                            <img src="{{asset('front/')}}/assets/images/Profile.png" alt="profile" class="testimonial-img">
-                            <p class="testimonial-name">Nout Golstein</p>
-                        </div>
-                    </div>
-                    <ol class="carousel-indicators">
-                        <li data-target="#testimonialCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#testimonialCarousel" data-slide-to="1"></li>
-                        <li data-target="#testimonialCarousel" data-slide-to="2"></li>
-                    </ol>
-                </div>
-            </section>
+           
 
        
 @endsection

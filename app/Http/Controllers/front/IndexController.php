@@ -4,10 +4,14 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mail;
+use Log;
 use App\Models\egitim;
 use App\Models\experience;
 use App\Models\personal;
+use App\Models\Contact;
 use App;
+
  use Illuminate\Support\Facades\Storage;
 class IndexController extends Controller
 {
@@ -78,6 +82,54 @@ class IndexController extends Controller
      public function contact()
     {
         return view('front.contact');
+    }
+    public function contactpost(Request $request)
+    {
+        
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'icerik'=>'required',
+            'email'=>'required|email',
+           
+               
+           ]);
+       if ($validator->fails())
+        {
+       return response()->json(['errors'=>$validator->errors()->all()]);
+       }
+       $data = ['name'=>$request->name,'email'=>$request->email,'icerik'=>$request->icerik,'subject'=>'İletişim Formu'];
+
+       try{
+
+       
+       Mail::send('mail.offer', $data, function($message) use ($data)
+         {
+           $message->from($data['email']);
+           $message->to('66fatihavci@gmail.com');
+           $message->subject($data['subject']);
+         });
+         return response()->json(['status'=>trans('general.success')]);
+
+
+       }
+       catch(\Exception $e){
+
+           Log::info($e->getText());
+           return response()->json(['status'=>trans('general.false')]);
+          
+       }
+
+
+
+        /*$data=new Contact;
+        $data->name=$request->name;
+        $data->email=$request->email;
+        $data->content=$request->content;
+        $save=$data->save();
+        if(!$save){
+            return response()->json(['status'=>'Failed']);
+        }
+        return response()->json(['status'=>'Success']);*/
     }
 
     /**

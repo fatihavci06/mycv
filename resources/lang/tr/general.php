@@ -14,7 +14,7 @@ return [
     */
 
     'test' => 'test',
-    'index'=>'Anasayfa',
+    'index'=>'ANASAYFA',
     'personal_information'=>'Personel Bilgileri',
     'birthday'=>'Doğum Günü',
     'website'=>'Web Site',
@@ -26,5 +26,16 @@ return [
     'interests'=>'HOBİLER',
     'education'=>'Eğitimler',
     'experience'=>'Deneyimler',
+    'contact'=>'İLETİŞİM',
+    'getintouch'=>'İLETİŞİM KURUN',
+    'contact_text'=>'Bir proje, iş veya başka bir şey hakkında konuşmak isterseniz, iletişime geçebilirsiniz.',
+    'mylocation'=>'Lokasyonum',
+    'name'=>'İsim ve Soyisim',
+     'email'=>'Eposta',
+     'content'=>'Mesaj',
+     'send'=>'Gönder',
+     'success'=>'Başarılı',
+     'false'=>'Hatalı',
+     'loading'=>'Yükleniyor...'
 
 ];

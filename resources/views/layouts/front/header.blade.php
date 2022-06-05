@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('front/')}}/assets/vendors/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="{{asset('front/')}}/assets/css/live-resume.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
 
@@ -31,14 +32,11 @@
 
     @endphp
 
-        <button class="btn btn-white btn-share ml-auto mr-3 ml-md-0 mr-md-auto"><img src="{{asset('front/')}}/assets/images/share.svg" alt="share" class="btn-img">
-            SHARE</button>
+        <div class=" ml-auto mr-3 ml-md-0 mr-md-auto">
+            </div>
         <nav class="collapsible-nav" id="collapsible-nav">
-            <a href="{{route('front.index')}}" class="nav-link @if(Request::segment(1)=='') active @endif">HOME</a>
-            <a href="{{route('front.resume')}}" class="nav-link @if(Request::segment(1)=='resume') active @endif">RESUME</a>
-            <a href="{{route('front.portfolio')}}" class="nav-link @if(Request::segment(1)=='portfolio') active @endif">PORTFOLIO</a>
-            <a href="{{route('front.blog')}}" class="nav-link @if(Request::segment(1)=='blog') active @endif">BLOG</a>
-            <a href="{{route('front.contact')}}" class="nav-link @if(Request::segment(1)=='contact') active @endif">CONTACT</a>
+            <a href="{{route('front.index')}}" class="nav-link @if(Request::segment(1)=='') active @endif">@lang('general.index')</a>    
+            <a href="{{route('front.contact')}}" class="nav-link @if(Request::segment(1)=='contact') active @endif">@lang('general.contact')</a>
         </nav>
         <button class="btn btn-menu-toggle btn-white rounded-circle" data-toggle="collapsible-nav"
             data-target="collapsible-nav"><img src="{{asset('front/')}}/assets/images/hamburger.svg" alt="hamburger"></button>

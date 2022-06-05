@@ -24,7 +24,8 @@ Route::group([
    Route::get(LaravelLocalization::transRoute('routes.portfolio'), 'front\IndexController@portfolio')->name('front.portfolio'); 
    Route::get(LaravelLocalization::transRoute('routes.blog'), 'front\IndexController@blog')->name('front.blog'); 
    Route::get(LaravelLocalization::transRoute('routes.contact'), 'front\IndexController@contact')->name('front.contact');
-   Route::get('/','front\IndexController@index')->name('front.index'); 
+   Route::get('/','front\IndexController@index')->name('front.index');
+   Route::post('/contact','front\IndexController@contactpost')->name('front.contactpost'); 
    Route::get('/download_cv','front\IndexController@download_cv')->name('front.download_cv'); 
 });
 
