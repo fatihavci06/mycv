@@ -58,5 +58,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/anasayfa-icerik-sil/{id}','back\IndexController@anasayfaiceriksil')->name('back.anasayfaicerik.sil');
     Route::get('/anasayfa-icerik-duzenle/{id}','back\IndexController@anasayfaicerikduzenle')->name('back.anasayfaicerik.duzenle');
     Route::post('/anasayfa-icerik-update/{id}','back\IndexController@anasayfaicerikupdate')->name('back.anasayfaicerik.update');
+    Route::get('/profilim','back\IndexController@profilimedit')->name('back.profilim.duzenle');
+    Route::post('/profilim','back\IndexController@profilimupdate')->name('back.profilim.update');
     
 });

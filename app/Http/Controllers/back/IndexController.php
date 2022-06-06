@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\egitim;
 use App\Models\personal;
+use App\Models\User;
 use App\Models\experience;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 class IndexController extends Controller
 {
     /**
@@ -35,6 +37,33 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function profilimedit(){
+        $data=User::find(1);
+        return view('back.profilim',['data'=>$data]);
+    }
+    public function profilimupdate(Request $request){
+        
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            
+           
+            
+           ]);
+           $data=User::findOrFail(1);
+           $data->name=$request->name;
+           $data->email=$request->email;
+           if($request->password!=''){
+             $data->password=Hash::make($request->password);
+           }
+           $data->save();
+           if(!$data->save()){
+               return redirect()->back()->with(['status'=>'Hata var']);
+           }
+           else{
+               return redirect()->back()->with(['status'=>'Başarılı']);
+           }
+    }
     public function egitimbilgileri()
     {
         $data=egitim::all();
